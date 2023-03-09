@@ -9,7 +9,6 @@ dotenv.config();
 app.get('/api/v1/', (req, res) => {
     res.send('hello world');
 });
-
 //routes
 app.use('/api/v1/upload', upload);
 app.use('/api/v1/user', user);

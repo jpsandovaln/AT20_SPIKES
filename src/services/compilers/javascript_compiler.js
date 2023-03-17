@@ -5,7 +5,7 @@ class JavaScriptCompiler extends Compiler{
     #compile_and_execute = 'node';
 
     constructor(){
-        super('javaScript','.js');
+        super('node','.js');
     }
 
     async compileRead(file_path){

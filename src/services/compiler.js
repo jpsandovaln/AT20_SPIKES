@@ -20,6 +20,7 @@ class Compiler{
     }
 
     executeCommand(command, callback = () => {}){
+        console.info('executeComand')
         return new Promise((resolve, reject) => {
             exec(command, (error, stdout, stderr) => {
                 if(error){

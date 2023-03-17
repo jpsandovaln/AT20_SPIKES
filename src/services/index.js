@@ -8,7 +8,7 @@ class CompilationService{
     }
 
     async run(file_path, language, version){
-        const compiler = this.#compilers.find(compiler => compiler.language === language);
+        const compiler = this.#compilers[language];
         if(!compiler){
             throw new Error('Compiler not found');
         }

@@ -3,10 +3,10 @@ const PythonCompiler = require('./python/python_compiler.js');
 const CSharpCompiler = require('./cSharp_compiler.js');
 
 
-const COMPILERS = [
-    new JavaCompiler(),
-    new PythonCompiler(),
-    new CSharpCompiler()
-]
+const COMPILERS = {
+   'java': new JavaCompiler(),
+   'python': new PythonCompiler(),
+   'c_sharp': new CSharpCompiler()
+}
 
 module.exports = COMPILERS;

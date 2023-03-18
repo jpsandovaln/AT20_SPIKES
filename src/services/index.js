@@ -12,7 +12,7 @@ class CompilationService{
         if(!compiler){
             throw new Error('Compiler not found');
         }
-        console.info('index serivces')
+        
         return await compiler.run(file_path);
     }
 }

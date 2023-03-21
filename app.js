@@ -13,7 +13,7 @@ app.get('/api/v1/', (req, res) => {
 app.use('/api/v1/upload', upload);
 app.use('/api/v1/user', user);
 
-const port = process.env.PORT || 9090;
+//const port = process.env.PORT || 9090;
 app.listen(port, () => {
     console.log('The app is online');
 });

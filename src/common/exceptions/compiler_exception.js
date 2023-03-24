@@ -10,12 +10,12 @@ class CompilerException extends Error {
         return this.status;
     }
 
-    get getErrorCode () {
-        return this.errorCode;
-    }
-
     get progLang () {
         return this.progLang;
+    }
+
+    get getErrorCode () {
+        return this.errorCode;
     }
 }
 

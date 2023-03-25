@@ -6,12 +6,11 @@ const storage = multer.diskStorage({
         cb(null, 'uploads');
     },
     filename: (req, file, cb) => {
-        console.log(file);
         cb(null, `${file.originalname}`);
-    },
+    }
 });
 
-const uploadFile = multer({ storage: storage })
+const uploadFile = multer({ storage });
 exports.upload = uploadFile.single('File');
 
 exports.uploadFileMessage = (req, res) => {

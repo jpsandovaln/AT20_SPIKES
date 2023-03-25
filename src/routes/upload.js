@@ -7,7 +7,7 @@ router.post(
     '/',
     middleware.upload,
     middleware.uploadFileMessage
-)
+);
 
 router.get('/', (req, res) => {
     res.send('hello from upload route');

@@ -1,18 +1,18 @@
 const COMPILERS = require('./compilers/list.js');
 
-class CompilationService{
+class CompilationService {
     #compilers;
 
-    constructor(){
+    constructor () {
         this.#compilers = COMPILERS;
     }
 
-    async run(file_path, language){
+    async run (file_path, language) {
         const compiler = this.#compilers.find(compiler => compiler.language === language);
-        if(!compiler){
+        if (!compiler) {
             throw new Error('Compiler not found');
         }
-        
+
         return await compiler.run(file_path);
     }
 }

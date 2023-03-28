@@ -1,6 +1,7 @@
 const { exec } = require('child_process');
 const { stdout, stderr } = require('process');
 
+<<<<<<< HEAD
 class Compiler {
     #language;
 
@@ -17,6 +18,13 @@ class Compiler {
 
     get language () {
         return this.#language;
+=======
+class Compiler{
+
+
+    constructor(){
+
+>>>>>>> development
     }
 
     executeCommand (command, callback = () => {}) {

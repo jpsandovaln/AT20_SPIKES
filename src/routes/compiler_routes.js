@@ -5,8 +5,6 @@ const compiler_middleware = require('../middlewares/compiler_middleware.js');
 
 const compiler = new CompilerController();
 
-
-router.get('/', compiler_middleware , compiler.get);
-
+router.get('/', compiler_middleware, compiler.get);
 
 module.exports = router;

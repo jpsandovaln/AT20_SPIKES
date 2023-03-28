@@ -1,8 +1,7 @@
 const CompilationService = require('../services');
 
-class CompilerController{
-
-    async get(req, res){
+class CompilerController {
+    async get (req, res) {
         const service = new CompilationService();
 
         const { language } = req.body;
@@ -15,6 +14,5 @@ class CompilerController{
         res.status(404).send(response);
     }
 }
-
 
 module.exports = CompilerController;

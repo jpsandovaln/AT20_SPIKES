@@ -1,9 +1,9 @@
 const COMPILERS = require('./compilers/list.js');
 
-class CompilationService{
+class CompilationService {
     #compilers;
 
-    constructor(){
+    constructor () {
         this.#compilers = COMPILERS;
     }
 

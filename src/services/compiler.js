@@ -1,36 +1,17 @@
 const { exec } = require('child_process');
 const { stdout, stderr } = require('process');
 
-<<<<<<< HEAD
-class Compiler {
-    #language;
-
-    #ext;
-
-    constructor (language, ext) {
-        this.#language = language;
-        this.#ext = ext;
-    }
-
-    get ext () {
-        return this.#ext;
-    }
-
-    get language () {
-        return this.#language;
-=======
 class Compiler{
 
 
     constructor(){
 
->>>>>>> development
     }
 
-    executeCommand (command, callback = () => {}) {
+    executeCommand(command, callback = () => {}){
         return new Promise((resolve, reject) => {
             exec(command, (error, stdout, stderr) => {
-                if (error) {
+                if(error){
                     reject(error);
                     return;
                 }
@@ -39,10 +20,12 @@ class Compiler{
         });
     }
 
-    run (/* file_path */) {
-        // abstrac class
+    run(/*file_path*/){
+        //abstrac class
         throw new Error('Abstract class you must implement this method');
     }
+
+
 }
 
 module.exports = Compiler;

@@ -11,24 +11,23 @@ with Jalasoft
 */
 const Compiler = require('../compiler.js');
 
-class JavaScriptCompiler extends Compiler {
-// Command to compile in node
+class JavaScriptCompiler extends Compiler{
+//Command to compile in node
     #compile_and_execute = 'node';
 
-    constructor () {
-        super('node', '.js');
+    constructor(){
+        super('node','.js');
     }
-
-    // Returns a json structure with the output of the file that was sent to compile with node.
-    async compileRead (file_path) {
+//Returns a json structure with the output of the file that was sent to compile with node.
+    async compileRead(file_path){
+       
         const command = `${this.#compile_and_execute} ${file_path}`;
         return await this.executeCommand(command, (stdout, stderr) => {
-            return { stdout, stderr };
+            return {stdout, stderr};
         });
     }
-
-    // Calls compileRead function.
-    async run (file_path) {
+//Calls compileRead function.
+    async run(file_path){
         return await this.compileRead(file_path);
     }
 }

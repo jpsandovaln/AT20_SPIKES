@@ -12,7 +12,7 @@ class CompilerController{
         const response = await service.run(saved_file_path, language, version)
                                     .catch(err => ({'error': err.message}));
                                     
-        res.status(200).send(response);
+        res.status(404).send(response);
     }
 }
 

@@ -3,20 +3,9 @@ const { stdout, stderr } = require('process');
 
 class Compiler{
 
-    #language;
-    #ext;
 
-    constructor(language, ext){
-        this.#language = language;
-        this.#ext = ext;
-    }
+    constructor(){
 
-    get ext(){
-        return this.#ext;
-    }
-
-    get language(){
-        return this.#language;
     }
 
     executeCommand(command, callback = () => {}){

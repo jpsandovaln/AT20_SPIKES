@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 
 const compiler = require('./src/routes/compiler_routes.js');
+const loggerService = require('./loggerService.js');
 
 
 const app = express();
@@ -15,5 +16,6 @@ app.use('/api/v1.0/compiler', compiler)
 const PORT = process.env.PORT || 9292;
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    // console.log(`Server running on port ${PORT}`);
+    loggerService.info(`Server running on port ${PORT}`);
 });

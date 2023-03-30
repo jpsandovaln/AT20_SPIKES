@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const upload = require('./src/routes/upload');
 const user = require('./src/routes/user');
+const loggerService = require('./loggerService');
 
 const app = express();
 dotenv.config();
@@ -15,5 +16,6 @@ app.use('/api/v1/user', user);
 
 //const port = process.env.PORT || 9090;
 app.listen(port, () => {
-    console.log('The app is online');
+    // console.log('The app is online');
+    loggerService.info('The app is online');
 });

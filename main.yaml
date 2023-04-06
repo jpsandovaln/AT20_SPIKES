@@ -1,0 +1,22 @@
+# main.yaml
+swagger: '2.0'
+info:
+  title: My API
+  version: 1.0.0
+basePath: /api
+schemes:
+  - http
+consumes:
+  - application/json
+produces:
+  - application/json
+paths:
+  /interviews:
+    $ref: 'api1.yaml#/paths/roles'
+  /roles:
+    $ref: 'api2.yaml#/paths/interviews'
+definitions:
+  User:
+    $ref: 'api1.yaml#/definitions/User'
+  Order:
+    $ref: 'api2.yaml#/definitions/Order'

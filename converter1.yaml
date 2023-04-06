@@ -1,0 +1,52 @@
+openapi: 3.0.0
+info:
+  title: Converter API
+  description: Converter Audio Video Image PDF API
+  version: 0.1.9
+servers:
+  - url: http://localhost:9090/api/v1.0
+    description: Converter server
+
+paths:
+  /convert_audio/converter:
+    post:
+      summary: Upload a Audio
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                audio:
+                  name: audio
+                  type: string
+                  format: binary
+                typeTo:
+                  name: typeTo
+                  type: string
+                bitRate:
+                  name: bitRate
+                  type: string
+                duration:
+                  name: duration
+                  type: string
+                codec:
+                  name: codec
+                  type: string
+            examples:
+              example1:
+                summary: Example of a request to convert an audio file
+                value:
+                  audio: binary-audio-data
+                  typeTo: mp3
+                  bitRate: 128
+                  duration: 60
+                  codec: mp3
+      responses:
+        '200':
+          description: File uploaded successfully
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error

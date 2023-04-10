@@ -1,28 +1,35 @@
-import { Box, Button, TextField, Select, MenuItem } from "@mui/material";
+import { Box, Button, TextField} from "@mui/material";
 import { Formik } from "formik";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import { useState } from "react"
 import {useMutation} from '@apollo/client'
-import { CREATE_USER } from "../../graphql/user";
+import { ADD_PERSONAL_INFO } from "../../graphql/user";
 
-
-export function Form () {
+const userId = '851b4408-dc81-4107-884a-ed8954e80cda';
+export function AddPersonalInfo () {
   const isNonMobile = useMediaQuery("(min-width:600px)");
-
-  const [user, setUser] = useState({
-    name: "",
-    phone: "",
-    email: "",
-    password: "",
-    roleId: "",
+  
+  const [info, setInfo] = useState({
+    globalID: "",
+    firstName: "",
+    lastName: "",
+    country: "",
+    city: "",
+    age: "",
   });
 
-  const [createUser, { data, loading, error }] = useMutation(CREATE_USER, {
+  const [addInfo, { data, loading, error }] = useMutation(ADD_PERSONAL_INFO, {
     onCompleted: () => {
-      alert('User created successfully!');
+      alert("Info added successfully");
       console.log(data);
-      setUser({ name: '', phone: '',email: '',password: '', roleId: '' });
+      setInfo({   
+      globalID: "",
+      firstName: "",
+      lastName: "",
+      country: "",
+      city: "",
+      age: "",});
     },
   });
 
@@ -31,27 +38,27 @@ export function Form () {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setUser((prevUser) => ({ ...prevUser, [name]: value }));
+    setInfo((prevInfo) => ({ ...prevInfo, [name]: value }));
     
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createUser({
+    addInfo({
       variables: {
-        name: user.name,
-        phone: user.phone,
-        email: user.email,
-        firstPassword: user.password,
-        roleId: user.role,
+        globalID: userId,
+        firstName: info.firstName,
+        lastName: info.lastName,
+        country: info.city,
+        city: info.city,
+        age: info.age,
       }
     });
-    //console.log(user);
   };
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="Please add your info" subtitle="" />
 
       <Formik
         onSubmit={handleSubmit}
@@ -74,9 +81,9 @@ export function Form () {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Name"
+                label="First Name"
                 onChange={handleChange}
-                name="name"
+                name="firstName"
                 error={!!touched.name && !!errors.name}
                 helperText={touched.name && errors.name}
                 sx={{ gridColumn: "span 3" }}
@@ -85,49 +92,46 @@ export function Form () {
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Password"
+                label="Last Name"
                 onChange={handleChange}
-                name="password"
+                name="lastName"
                 error={!!touched.name && !!errors.name}
                 helperText={touched.name && errors.name}
                 sx={{ gridColumn: "span 3" }}
               />
-              <TextField
+               <TextField
                 fullWidth
                 variant="filled"
                 type="text"
-                label="Phone number"
+                label="Country"
                 onChange={handleChange}
-                name="phone"
+                name="country"
                 error={!!touched.name && !!errors.name}
                 helperText={touched.name && errors.name}
                 sx={{ gridColumn: "span 3" }}
               />
-              <TextField
+               <TextField
                 fullWidth
                 variant="filled"
-                type="email"
-                label="Email"
+                type="text"
+                label="City"
                 onChange={handleChange}
-                name="email"
-                error={!!touched.email && !!errors.email}
-                helperText={touched.email && errors.email}  
+                name="city"
+                error={!!touched.name && !!errors.name}
+                helperText={touched.name && errors.name}
                 sx={{ gridColumn: "span 3" }}
               />
-              <Box sx={{ gridColumn: "span 3" }}>
-                <Select
-                  fullWidth
-                  variant="filled"
-                  label="Role"
-                  name="role"
-                  onChange={handleChange}
-                  value={user.role}
-                  error={!!touched.role && !!errors.role}
-                >
-                  <MenuItem value="6434047adac0b9099bb6a871">Trainer</MenuItem>
-                  <MenuItem value="6434045edac0b9099bb6a86f">Candidate</MenuItem>
-                </Select>
-              </Box>
+                <TextField
+                fullWidth
+                variant="filled"
+                type="text"
+                label="Age"
+                onChange={handleChange}
+                name="age"
+                error={!!touched.name && !!errors.name}
+                helperText={touched.name && errors.name}
+                sx={{ gridColumn: "span 3" }}
+              />
             </Box>
             <Box display="flex" justifyContent="end" mt="20px">
               <Button
@@ -136,7 +140,7 @@ export function Form () {
                 variant="contained"
                 disabled={isSubmitting}
               >
-                {isSubmitting ? "Creating..." : "Create New User"}
+                {isSubmitting ? "Connecting..." : "Submit data"}
               </Button>
             </Box>
           </form>

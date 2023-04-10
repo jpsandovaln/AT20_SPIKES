@@ -1,5 +1,6 @@
 import User from '../models/UserModel.js'
 import Role from '../models/RoleModel.js';
+import PersonalInfo from '../models/PersonalInfoModel.js';
 import { createWriteStream } from "fs";
 import { uuid } from'uuidv4';
 import bcrypt from 'bcrypt';
@@ -18,9 +19,6 @@ const saveFilesWithStream = ({ filename, mimetype, stream }) => {
 export const resolvers = {
     Query: {
         users: async() => await User.find(),
-        /* `user:` is defining a resolver function for the `User` type. It specifies how to resolve the
-        `role` field for a `User` object. In this case, it is using the `roleId` field of the `User`
-        object to find the corresponding `Role` object and return it. */
         user: async(_, {_id}) => await User.findById(_id),
         roles: async() => await Role.find(),
         role: async(_, {_id}) => await Role.findById(_id),
@@ -35,18 +33,26 @@ export const resolvers = {
         },
 
         createUser: async (_, {name, phone,email,firstPassword, roleId}) => {
-            const user = new User({
-                globalID:uuid(),
-                name,
-                phone,
-                email,
-                firstPassword: await bcrypt.hash(firstPassword, 10),
-                password: '',
-                roleId
-            })
-            const savedUser = await user.save();
-          
-            return savedUser;
+            const nameSearch = await User.findOne({'name':name});
+            const emailSearch = await User.findOne({'email':email});
+            const registeredUser = nameSearch || emailSearch;
+            if(!registeredUser) {
+                const user = new User({
+                    globalID:uuid(),
+                    name,
+                    phone,
+                    email,
+                    firstPassword: await bcrypt.hash(firstPassword, 10),
+                    password: '',
+                    roleId,
+                  
+                });
+                const savedUser = await user.save();
+                return savedUser;
+            }
+            else {
+                console.log('User already exists');
+            }
         },
 
         deleteUser: async (_, {_id}) => {
@@ -67,6 +73,25 @@ export const resolvers = {
             if(!updateUser) throw new Error('User not found');
             return updateUser;
         },
+        addPersonalInfo: async (_, args) => {
+            const user = await User.findOne({'globalID': args.globalID});
+            if(!user) {
+                console.log('User not found');
+            }
+            else {
+                const newInfo = new PersonalInfo ({
+                    firstName: args.firstName,
+                    lastName: args.lastName,
+                    country: args.country,
+                    city: args.city,
+                    age: args.age
+                });
+            const savedNewInfo = await newInfo.save();
+            const updatedUser = await User.findOneAndUpdate({'globalID': args.globalID}, {$push:{personalInfo:savedNewInfo}});
+            return updatedUser
+            }
+           
+        },
         singleUpload: async (_, args) => {
             const { filename, mimetype, createReadStream } = await args.file.file;
             const stream = createReadStream();
@@ -78,14 +103,12 @@ export const resolvers = {
             const emailLoginSearch = await User.findOne({'email':loginData});
             const loginUser = nameLoginSearch || emailLoginSearch;
             if(!loginUser) {
-                
                 return 'User not found!';
             }
             else {
                 if (loginUser.firstPassword && await bcrypt.compare(password, loginUser.firstPassword)) {
                     const userRole = await Role.findOne({'_id':loginUser.roleId});
                     console.log(userRole);
-                    console.log(userRole._id);
                     return 'Please update your password';
                 } else {
                     if (await bcrypt.compare(password, loginUser.password)) {

@@ -24,7 +24,8 @@ import Spatial from "./scenes/spatial";
 import { UploadFiles } from "./scenes/loggedin/UploadFiles.js";
 import { ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client';
 import { createUploadLink } from "apollo-upload-client";
-import {Login} from './scenes/login/Login';
+import {Login} from "./scenes/login/Login";
+import {AddPersonalInfo} from "./scenes/personalInfo/index"
 
 const client = new ApolloClient({
 
@@ -61,6 +62,7 @@ function App() {
                 <Route path="/spatial" element={<Spatial />} />
                 <Route path="/login" element={<Login />}    />
                 <Route path="/loggedin" element={<UploadFiles />} />
+                <Route path="/addInfo" element={< AddPersonalInfo/>} />
 
               </Routes>        
           </main> 

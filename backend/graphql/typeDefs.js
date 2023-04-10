@@ -12,14 +12,47 @@ export const typeDefs = gql`
        
     }
     type Mutation {
-        createRole(name: String): Role
-        createUser(name: String, phone: String, email: String, firstPassword: String,roleId: ID): User
-        updateRole(_id: ID, name: String): Role
-        updateUser(_id: ID, globalID:String, name: String, email: String, roleId: ID): User
-        deleteRole(_id: ID): Role
-        deleteUser(_id: ID): User
-        singleUpload(file: Upload): String
-        login(loginData: String, password: String): String
+        createRole(
+            name: String): Role
+        createUser(
+            name: String,
+            phone: String, 
+            email: String, 
+            firstPassword: String,
+            roleId: ID
+            ): User
+        updateRole
+        (_id: ID,
+            name: String
+            ): Role
+        updateUser(
+            _id: ID,
+            globalID:String,
+            name: String,
+            email: String,
+            roleId: ID
+            ):User
+        deleteRole(
+            _id: ID
+            ): Role
+        deleteUser(
+            _id: ID
+            ): User
+        singleUpload(
+            file: Upload
+            ): String
+        login(
+            loginData: String,
+            password: String
+            ): String
+        addPersonalInfo(
+            globalID: String
+            firstName: String,
+            lastName: String,
+            country: String,
+            city: String,
+            age: String,
+        ):perInfo
     }
     type Role {
         _id: ID
@@ -27,6 +60,15 @@ export const typeDefs = gql`
         createdAt: String
         updatedAt: String
         users: [User]
+    }
+    type perInfo {
+        _id: ID
+        globalID: String
+        firstName: String
+        lastName: String
+        country: String
+        city: String
+        age: String
     }
     type User {
         _id: ID
@@ -37,6 +79,10 @@ export const typeDefs = gql`
         createdAt: String
         updatedAt: String
         role: Role
+        personalInfo: perInfo
     }
-    
+    type Info {
+        Message: String, 
+        Data: String
+    }
 `

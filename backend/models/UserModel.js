@@ -38,6 +38,10 @@ const UserSchema = new mongoose.Schema({
         ref: 'Role',
         required: true
         },
+    personalInfo:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'PersonalInfo'
+        }
     
     },
     {

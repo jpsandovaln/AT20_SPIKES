@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import {useMutation, gql} from "@apollo/client";
+import {useMutation} from "@apollo/client";
+import { UPLOAD_FILE } from "../../graphql/user.js";
 
-const UPLOAD_IMAGE = gql`
-  mutation ($file: Upload) {
-    singleUpload(file: $file)
-  }
-`;
 export function  UploadFiles () {
   
-  const [singleUpload, data] = useMutation(UPLOAD_IMAGE,{
+  const [singleUpload, data] = useMutation(UPLOAD_FILE,{
     onCompleted: () => {
+    console.log(data);
     alert('File uploded successfully!');
     setnewFile({file: null});
     },
   }
   );
   const [newFile,setnewFile]= useState(null);
-  console.log(newFile);
   const handleFileChange = (e) => {
     setnewFile(e.target.files[0]);
 };
@@ -28,7 +24,6 @@ export function  UploadFiles () {
       file: newFile
     }
   })
-    
   };
 return (
       <div>

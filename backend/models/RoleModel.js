@@ -12,28 +12,34 @@ with Jalasoft
 
 import mongoose from "mongoose";
 
-// const roleSchema = new mongoose.Schema({
-//     name: {
-//         type: String,
-//         required: true
-//     }
-// })
-// export default mongoose.model("Role", roleSchema);
-//Create rol schema
-const RoleSchema = new mongoose.Schema (
-    {
-        role:{
-            type: String,
-            unique: true
-        },
-        description:{
-            type: String,
-        }
+const RoleSchema = new mongoose.Schema(
+   { 
+    name: {
+        type: String,
+        required: true
+    }
     },
     {
-        timestamps:true,
-        versionKey:false
+    timestamps:true,
+    versionKey:false
     }
-);
+)
+// export default mongoose.model("Role", roleSchema);
+//Create rol schema
+// const RoleSchema = new mongoose.Schema (
+//     {
+//         role:{
+//             type: String,
+//             unique: true
+//         },
+//         description:{
+//             type: String,
+//         }
+//     },
+//     {
+//         timestamps:true,
+//         versionKey:false
+//     }
+// );
 
 export default mongoose.model("Role", RoleSchema);

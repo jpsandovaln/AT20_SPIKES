@@ -4,7 +4,7 @@
   "description": "sholud be able to run a code and return the result",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index.js",
+    "start": "node index.js",
     "test": "jest"
   },
   "author": "Jhoel Flores",

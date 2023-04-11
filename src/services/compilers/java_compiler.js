@@ -36,10 +36,10 @@ class JavaCompiler extends Compiler{
             throw error;
         }
 
-        let file_path_aux = file_path.split('\\');
+        let file_path_aux = file_path.split('/');
         const file = file_path_aux[file_path_aux.length-1];
         file_path = file.split('.java')[0];
-        const command = `${this.#interpreter_command.java} -cp ${__dirname + '\\temp_saved_files'} ${file_path}`;
+        const command = `${this.#interpreter_command.java} -cp ${__dirname + '/temp_saved_files'} ${file_path}`;
 
         return await this.executeCommand(command, (stdout, stderr) => {
             return {stdout, stderr};
@@ -56,7 +56,7 @@ class JavaCompiler extends Compiler{
 
         const command = `${this.#interpreter_command.javac} ${file_path}`;
 
-        return await this.executeCommand(command, async (stdout, stderr) => {
+        return await this.executeCommand(command, (stdout, stderr) => {
             return {stdout, stderr};
         });
 

@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+    compilers:
+        container_name: compiler_service
+        image: compiler
+        restart: always
+        build: .
+        ports:
+            - "${PORT_OUT}:${PORT}"
+        volumes:
+            - .:/usr/src/app

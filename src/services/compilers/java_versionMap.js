@@ -10,21 +10,26 @@ accordance with the terms of the license agreement you entered into
 with Jalasoft
 **/
 
-const path = require('path');
+const dotenv = require('dotenv');
+dotenv.config();
 
 // Builds a map to find the routes of each version ejecutable
-const VERSIONES = {
-    // '1.7': '../../thirdparties/java_versions/1.7/javac.exe', + '..\\..\\thirdparties\\java_versions\\1.7\\javac.exe'
-    // '1.7': path.normalize(__dirname + '..\\..\\..\\thirdparties\\java_versions\\1.7\\java.exe'),
-    '1.7': {
-        // 'javac': path.normalize('C:\\Java\\jdk1.7.0_80\\bin\\javac.exe'),
-        // 'java': path.normalize('C:\\Java\\jdk1.7.0_80\\bin\\java.exe'),
-        'javac': path.normalize('D:\\Charles\\JalaCapacitacion\\Progra101\\at20\\develop_\\AT20_COMPILER_SERVICE\\src\\thirdparties\\Java\\jdk1.7.0_80\\bin\\javac.exe'),
-        'java': path.normalize('D:\\Charles\\JalaCapacitacion\\Progra101\\at20\\develop_\\AT20_COMPILER_SERVICE\\src\\thirdparties\\Java\\jdk1.7.0_80\\bin\\java.exe'),
+const VERSIONES = {    
+    '1.7': {        
+        'javac': process.env.JAVAC_1_7,
+        'java': process.env.JAVA_1_7,
     },
     '1.8': {
-        'javac': path.normalize('D:\\Charles\\JalaCapacitacion\\Progra101\\at20\\develop_\\AT20_COMPILER_SERVICE\\src\\thirdparties\\Java\\jdk1.8.0_202\\bin\\javac.exe'),
-        'java': path.normalize('D:\\Charles\\JalaCapacitacion\\Progra101\\at20\\develop_\\AT20_COMPILER_SERVICE\\src\\thirdparties\\Java\\jdk1.8.0_202\\bin\\java.exe'),
+        'javac': process.env.JAVAC_1_8,
+        'java': process.env.JAVA_1_8,
+    },
+    '11': {
+        'javac': process.env.JAVAC_11,
+        'java': process.env.JAVA_11,
+    },
+    '17': {
+        'javac': process.env.JAVAC_17,
+        'java': process.env.JAVA_17,
     },
 }
 module.exports = VERSIONES;

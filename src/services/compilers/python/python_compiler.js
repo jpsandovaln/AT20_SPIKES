@@ -3,17 +3,18 @@ const VERSIONES = require('./python_versionMap.js');
 
 class PythonCompiler extends Compiler {
 
-    #interpreter_command;
+    #interpreter_command = 'python';
 
     constructor() {
         super('python','.py');
     }
 
-    async interpret(file_path,version){
-        this.#interpreter_command = VERSIONES [version]
-        if (!this.#interpreter_command) {
-            throw new Error('Version not found');
-        }
+    // async interpret(file_path,version){
+    async interpret(file_path){
+        // this.#interpreter_command = VERSIONES [version]
+        // if (!this.#interpreter_command) {
+        //     throw new Error('Version not found');
+        // }
         const command = `${this.#interpreter_command} ${file_path}`;
 
         return await this.executeCommand(command, (stdout, stderr) => {
@@ -22,8 +23,9 @@ class PythonCompiler extends Compiler {
 
     }
 
-    async run(file_path, version){
-        return await this.interpret(file_path, version);
+    // async run(file_path, version){
+    async run(file_path){
+        return await this.interpret(file_path);
     }
 
 }

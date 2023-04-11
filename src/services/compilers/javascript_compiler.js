@@ -20,14 +20,14 @@ class JavaScriptCompiler extends Compiler{
     }
 //Returns a json structure with the output of the file that was sent to compile with node.
     async compileRead(file_path){
-       
         const command = `${this.#compile_and_execute} ${file_path}`;
+        // console.log(command);
         return await this.executeCommand(command, (stdout, stderr) => {
             return {stdout, stderr};
         });
     }
 //Calls compileRead function.
-    async run(file_path){
+    async run(file_path, version){
         return await this.compileRead(file_path);
     }
 }
